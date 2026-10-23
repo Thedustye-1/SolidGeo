@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+release/
+release-v2/
+*.asar
+*.zip
+
+# Local release artifacts (attach these to GitHub Releases instead)
+releases/
+
+# Test output
+shots/
+smoke.png
+web-*.png
+playwright-report/
+test-results/
+
+# Logs and OS files
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Editor
+.vscode/
+.idea/

@@ -1,0 +1,12 @@
+﻿import { chromium } from 'playwright-core';
+const browser = await chromium.launch({ executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', headless:true, args:['--no-sandbox','--disable-crash-reporter','--enable-unsafe-swiftshader'] });
+const page = await browser.newPage({ viewport:{width:1620,height:1020} });
+page.on('pageerror',e=>console.log('PAGEERROR',String(e)));
+await page.goto('http://127.0.0.1:4173/?demo=1',{waitUntil:'networkidle'});
+await page.waitForTimeout(1400);
+await page.evaluate(()=>{ const s=window.__solidgeoStore.getState(); const cube=s.entities.find(e=>e.type==='solid'); s.setSelection([{id:cube.id}]); s.setSettings({showMeasures:true}); });
+await page.waitForTimeout(700);
+await page.screenshot({path:'shots/v2-measure.png'});
+const labels = await page.evaluate(()=>window.__solidgeoEngine.scene.children.length);
+console.log('scene children', labels);
+await browser.close();

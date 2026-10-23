@@ -1,0 +1,17 @@
+﻿import { chromium } from 'playwright-core';
+const browser = await chromium.launch({ executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', headless:true, args:['--no-sandbox','--disable-crash-reporter'] });
+const page = await browser.newPage({ viewport:{width:1620,height:1020}, acceptDownloads:true });
+page.on('console', m=>console.log('CONSOLE',m.type(),m.text()));
+page.on('pageerror', e=>console.log('PAGEERROR',String(e)));
+page.on('download', d=>console.log('DOWNLOAD', d.suggestedFilename()));
+await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});
+await page.waitForTimeout(700);
+console.log('electron?', await page.evaluate(()=>Boolean(window.solidgeo)));
+await page.getByRole('button',{name:'文件',exact:true}).click();
+console.log('menus', await page.locator('.menu-dropdown').count());
+await page.locator('.menu-item',{hasText:'保存工程'}).click();
+await page.waitForTimeout(1500);
+console.log('toasts', await page.locator('.toast').allTextContents());
+console.log('dirty', await page.evaluate(()=>window.__solidgeoStore.getState().dirty));
+await page.screenshot({path:'shots/save-debug.png'});
+await browser.close();

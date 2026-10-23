@@ -1,0 +1,12 @@
+﻿import { chromium } from 'playwright-core';
+const browser = await chromium.launch({ executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', headless:true, args:['--no-sandbox','--disable-crash-reporter','--enable-unsafe-swiftshader'] });
+const page = await browser.newPage({ viewport:{width:1620,height:1020} });
+page.on('pageerror', e=>console.log('PAGEERROR',String(e)));
+await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});
+await page.waitForTimeout(500);
+await page.locator('.solid-tile', { hasText:'棱柱' }).click();
+await page.waitForTimeout(500);
+await page.screenshot({path:'shots/dialog-prism2.png'});
+const z = await page.evaluate(()=>{ const m=document.querySelector('.modal'); const b=document.querySelector('.modal-backdrop'); const cs=getComputedStyle(b); return { z: cs.zIndex, bg: cs.backgroundColor, op: cs.opacity, rect:m?.getBoundingClientRect().toJSON() }; });
+console.log(JSON.stringify(z));
+await browser.close();

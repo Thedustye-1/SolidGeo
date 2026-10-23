@@ -1,0 +1,11 @@
+{
+  "version": "v2",
+  "appVersion": "2.0.0",
+  "createdAt": "2026-10-23T11:59:55.595Z",
+  "release": {
+    "file": "releases/v2/SolidGeo-2.0.0-Portable.exe",
+    "bytes": 103673030,
+    "sha256": "3812e8db745ed5bcbf7fe2253b6cf68427d35c8eb98e82ba67ff01057e201019"
+  },
+  "note": "此目录是只读历史快照，后续改动请创建新版本，不修改旧版本。"
+}

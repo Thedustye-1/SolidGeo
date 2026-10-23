@@ -1,0 +1,77 @@
+{
+  "name": "solidgeo",
+  "productName": "SolidGeo",
+  "version": "1.0.0",
+  "description": "SolidGeo 立体几何 —— 面向高中立体几何教学的 Windows 11 四视口三维建模软件",
+  "author": "SolidGeo",
+  "license": "MIT",
+  "private": true,
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build:web": "vite build",
+    "build": "npm run typecheck && npm run build:web",
+    "electron": "electron .",
+    "start": "npm run build && electron .",
+    "dist": "npm run build && electron-builder --win portable --x64",
+    "dist:dir": "npm run build && electron-builder --win --dir",
+    "snapshot": "node scripts/snapshot-version.mjs",
+    "test:ui": "node scripts/ui-smoke.mjs",
+    "test:functions": "node scripts/function-test.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "^1.61.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "three": "^0.186.1",
+    "zustand": "^5.0.16"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/three": "^0.186.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "electron": "^45.0.0",
+    "electron-builder": "^26.15.3",
+    "playwright-core": "^1.64.1",
+    "typescript": "~5.9.3",
+    "vite": "^8.3.5"
+  },
+  "build": {
+    "appId": "com.solidgeo.app",
+    "productName": "SolidGeo",
+    "copyright": "Copyright © 2026 SolidGeo",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "build/icon.ico",
+      "build/icon.png",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "SolidGeo-${version}-Portable-${arch}.${ext}"
+    },
+    "portable": {
+      "artifactName": "SolidGeo-${version}-Portable.exe",
+      "requestExecutionLevel": "user",
+      "unpackDirName": "SolidGeo"
+    },
+    "compression": "maximum"
+  }
+}

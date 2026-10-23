@@ -1,0 +1,15 @@
+{
+  "version": "v2-web",
+  "appVersion": "2.0.0",
+  "edition": "Web Edition (Edge runtime compatibility layer)",
+  "createdAt": "2026-10-23T13:15:00.000Z",
+  "release": {
+    "folder": "releases/v2/SolidGeo-2.0.0-Web",
+    "zip": "releases/v2/SolidGeo-2.0.0-Web.zip",
+    "zipBytes": 593521,
+    "zipSha256": "52d2cdef63529fdb8b7ff41b56fa98950a78033818b7589baebab6afdd39c0cce",
+    "entry": "启动SolidGeo.vbs",
+    "fallback": ["启动服务.cmd", "打开SolidGeo.url"]
+  },
+  "note": "v1/v2 Electron 快照保持原样。此快照记录 Windows 11 build 26200 兼容运行层：同一前端通过 Edge 启动。"
+}
